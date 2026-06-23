@@ -7,6 +7,18 @@
 const HOTEL_ID = "kai-unzen";
 
 const POIS = [
+  // ===== 交通拠点 =====
+  {
+    id: "nagasaki-airport",
+    name: "長崎空港",
+    category: "transit",
+    area: "大村市",
+    lat: 32.9168, lng: 129.9142,
+    duration: 30,
+    desc: "大村湾に浮かぶ海上空港。到着後はレンタカー受け取りなど。長崎市内まで車で約50分（長崎自動車道経由）。この30分は荷物受け取り＋レンタカー手続きの目安です。",
+    tags: ["出発地", "レンタカー", "空港"]
+  },
+
   // ===== 宿（拠点）=====
   {
     id: "kai-unzen",
@@ -120,6 +132,38 @@ const POIS = [
     desc: "九州最古の喫茶店。名物トルコライスと、ふわふわの長崎風ミルクセーキが有名。",
     tags: ["トルコライス", "ミルクセーキ", "カフェ"]
   },
+  // ===== 食べ歩き =====
+  {
+    id: "kakuni-manju",
+    name: "岩崎本舗（角煮まんじゅう）",
+    category: "food",
+    area: "長崎市",
+    lat: 32.7463, lng: 129.8720,
+    duration: 20,
+    desc: "長崎名物・角煮まんじゅうの人気店。トロトロに煮た豚角煮を饅頭で挟んだ食べ歩きグルメ。長崎駅・大波止ターミナル近くに複数店舗あり。テイクアウトで食べながら次のスポットへ。",
+    tags: ["角煮まんじゅう", "食べ歩き", "テイクアウト", "長崎名物"]
+  },
+  {
+    id: "fukusaya",
+    name: "福砂屋 本店（カステラ）",
+    category: "food",
+    area: "長崎市",
+    lat: 32.7466, lng: 129.8779,
+    duration: 20,
+    desc: "1624年創業の長崎カステラ老舗。底のザラメ糖がザクザクとした食感が特徴。本店での試食や、カットカステラの食べ歩きも楽しめる。お土産購入にも最適。",
+    tags: ["カステラ", "食べ歩き", "お土産", "老舗", "長崎名物"]
+  },
+  {
+    id: "yoshiso",
+    name: "吉宗 本店（茶碗蒸し・蒸し寿司）",
+    category: "food",
+    area: "長崎市",
+    lat: 32.7435, lng: 129.8801,
+    duration: 70,
+    desc: "明治元年（1868年）創業の長崎の老舗。特大の長崎名物「茶碗蒸し」と「蒸し寿司」のセットが名物。2日目の夕食に最適。浜の町アーケード近く。ランチ・夕食ともに営業。",
+    tags: ["茶碗蒸し", "蒸し寿司", "夕食", "老舗", "長崎名物"]
+  },
+
   {
     id: "gunkanjima",
     name: "軍艦島(端島)クルーズ乗り場",
@@ -249,6 +293,7 @@ const POIS = [
 ];
 
 const CATEGORY_META = {
+  transit: { label: "交通拠点",  color: "#6b7280", emoji: "✈️" },
   hotel:   { label: "宿",        color: "#7c3aed", emoji: "🏨" },
   food:    { label: "グルメ",    color: "#e11d48", emoji: "🍜" },
   history: { label: "歴史・文化", color: "#2563eb", emoji: "🏯" },
@@ -258,6 +303,15 @@ const CATEGORY_META = {
 
 // 1泊2日のおすすめプラン（id順）。レンタカー・グルメ/歴史/自然重視。
 const PRESETS = {
+  airport: {
+    name: "✈️ 空港発：食べ歩き長崎観光 → 雲仙泊 → 帰路グルメ",
+    start1: "10:30",
+    start2: "09:00",
+    // Day1: 空港(10:30)→ 移動50分 → 中華街(ランチ)→ 角煮まんじゅう→ カステラ → グラバー園 → 大浦天主堂 → 界 雲仙(夕食はホテル)
+    day1: ["nagasaki-airport", "chinatown", "kakuni-manju", "fukusaya", "glover", "oura", "kai-unzen"],
+    // Day2: 雲仙地獄 → 仁田峠ロープウェイ → 小浜ちゃんぽん(ランチ) → 吉宗 本店(夕食) → 帰路
+    day2: ["unzen-jigoku", "nitatoge", "obama-champon", "yoshiso"]
+  },
   classic: {
     name: "王道：長崎市内 → 雲仙泊 → 地獄&ロープウェイ",
     start1: "10:00",
