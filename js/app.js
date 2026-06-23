@@ -15,6 +15,7 @@
   };
   let activeFilters = new Set(); // 空 = 全部表示
   let searchTerm = "";
+  let mapShownOnce = false; // スマホで地図タブを初めて開いたかどうか
 
   // ---- 地図 ----
   const map = L.map("map", { zoomControl: true }).setView([32.78, 130.05], 10);
@@ -489,7 +490,19 @@
 
         // Leaflet は非表示状態でサイズが 0×0 になるため、表示時に再計算が必要
         if (tab === "map") {
-          setTimeout(() => map.invalidateSize(), 60);
+          setTimeout(() => {
+            map.invalidateSize();
+            if (!mapShownOnce) {
+              mapShownOnce = true;
+              // ルートが選択済みならそこにフィット、なければ長崎エリアのデフォルト
+              const all = [...state[1], ...state[2]].map(id => POI_BY_ID[id]);
+              if (all.length >= 2) {
+                map.fitBounds(L.latLngBounds(all.map(p => [p.lat, p.lng])).pad(0.2));
+              } else {
+                map.setView([32.78, 130.05], 10);
+              }
+            }
+          }, 100);
         }
       });
     }
