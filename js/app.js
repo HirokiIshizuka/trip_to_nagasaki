@@ -469,6 +469,30 @@
     ["start1", "start2"].forEach(id => {
       document.getElementById(id).addEventListener("change", () => { saveToStorage(); renderRoute(); });
     });
+
+    // ---- スマホ タブ切り替え ----
+    const tabBar = document.getElementById("tabBar");
+    if (tabBar) {
+      const panelLeft  = document.querySelector(".panel-left");
+      const mapWrap    = document.querySelector(".map-wrap");
+      const panelRight = document.querySelector(".panel-right");
+
+      tabBar.addEventListener("click", (e) => {
+        const btn = e.target.closest(".tab-btn");
+        if (!btn) return;
+        const tab = btn.dataset.tab;
+
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.toggle("active", b === btn));
+        panelLeft.classList.toggle("tab-active",  tab === "spots");
+        mapWrap.classList.toggle("tab-active",    tab === "map");
+        panelRight.classList.toggle("tab-active", tab === "route");
+
+        // Leaflet は非表示状態でサイズが 0×0 になるため、表示時に再計算が必要
+        if (tab === "map") {
+          setTimeout(() => map.invalidateSize(), 60);
+        }
+      });
+    }
   }
 
   // 起動

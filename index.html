@@ -27,7 +27,7 @@
 
   <main class="layout">
     <!-- 左：スポット一覧 -->
-    <aside class="panel panel-left">
+    <aside class="panel panel-left tab-active">
       <h2 class="panel-title">スポットを選ぶ</h2>
       <div class="filters" id="filters"></div>
       <input type="search" id="searchBox" class="search" placeholder="スポット名で検索…" />
@@ -72,6 +72,22 @@
       </div>
     </aside>
   </main>
+
+  <!-- スマホ用タブバー -->
+  <nav class="tab-bar" id="tabBar" aria-label="メニュー">
+    <button class="tab-btn active" data-tab="spots">
+      <span class="tab-icon">📍</span>
+      <span class="tab-label">スポット</span>
+    </button>
+    <button class="tab-btn" data-tab="map">
+      <span class="tab-icon">🗺️</span>
+      <span class="tab-label">地図</span>
+    </button>
+    <button class="tab-btn" data-tab="route">
+      <span class="tab-icon">🗒️</span>
+      <span class="tab-label">ルート</span>
+    </button>
+  </nav>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="js/data.js"></script>

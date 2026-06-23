@@ -183,11 +183,109 @@ body {
   background: var(--accent); color: #fff; border: none; border-radius: 7px; padding: 6px 12px;
 }
 
-/* ===== Responsive ===== */
-@media (max-width: 980px) {
-  .layout { grid-template-columns: 1fr; grid-template-rows: auto 50vh auto; }
-  .panel-left, .panel-right { border: none; border-bottom: 1px solid var(--border); }
-  .poi-list { max-height: 40vh; }
-  .preset-label select { min-width: 160px; }
-  .app-header { flex-direction: column; align-items: stretch; gap: 8px; }
+/* ===== Tab bar（スマホのみ表示） ===== */
+.tab-bar { display: none; }
+
+/* ===== スマホレイアウト ===== */
+@media (max-width: 768px) {
+
+  /* ---- ヘッダー圧縮 ---- */
+  .app-header {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px 14px;
+    gap: 6px;
+  }
+  .title { display: flex; align-items: baseline; gap: 8px; }
+  .app-header h1 { font-size: .92rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .subtitle { display: none; }
+  .header-actions { display: flex; align-items: center; gap: 8px; }
+  .preset-label { flex: 1; flex-direction: row; align-items: center; gap: 6px; }
+  .preset-label select { flex: 1; min-width: 0; font-size: .8rem; }
+  .btn { padding: 7px 11px; font-size: .8rem; white-space: nowrap; }
+
+  /* ---- タブ式レイアウト ---- */
+  .layout {
+    flex: 1;
+    position: relative;
+    display: block;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  /* パネルと地図を重ね置き、デフォルトは非表示 */
+  .panel,
+  .map-wrap {
+    position: absolute;
+    inset: 0;
+    display: none;
+    border: none;
+  }
+
+  /* アクティブなタブだけ表示 */
+  .panel.tab-active  { display: flex; }
+  .map-wrap.tab-active { display: block; overflow: hidden; }
+
+  /* スポットパネル：内部の poi-list がスクロール */
+  .panel-left {
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .poi-list {
+    max-height: none;   /* 旧 40vh 制限を解除 */
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* ルートパネル：パネル全体をスクロール */
+  .panel-right {
+    flex-direction: column;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* ---- タブバー ---- */
+  .tab-bar {
+    display: flex;
+    flex-shrink: 0;
+    background: #fff;
+    border-top: 1px solid var(--border);
+    /* iOS ホームバー対応 */
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    box-shadow: 0 -2px 8px rgba(0,0,0,.07);
+  }
+  .tab-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 4px 7px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    gap: 3px;
+    color: var(--muted);
+    font: inherit;
+    transition: color .15s, background .15s;
+    border-radius: 0;
+  }
+  .tab-btn:active { background: var(--accent-soft); }
+  .tab-btn.active { color: var(--accent); }
+  .tab-icon { font-size: 1.35rem; line-height: 1; }
+  .tab-label { font-size: .65rem; font-weight: 700; letter-spacing: .02em; }
+
+  /* ---- 地図ポップアップ ---- */
+  .popup-desc { max-width: 200px; }
+
+  /* ---- 地図凡例 ---- */
+  .map-legend { bottom: 10px; left: 10px; font-size: .68rem; }
+
+  /* ---- ルートパネル内調整 ---- */
+  .day-block { padding: 10px 12px; }
+  .route-item { padding: 7px 8px; }
+  .day-summary { display: flex; flex-wrap: wrap; gap: 4px; }
+  .day-summary .pill { margin-right: 0; font-size: .72rem; }
+  .route-footer { padding: 10px 12px; }
 }
