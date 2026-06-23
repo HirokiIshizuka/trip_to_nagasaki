@@ -10,13 +10,23 @@ const POIS = [
   // ===== 交通拠点 =====
   {
     id: "nagasaki-airport",
-    name: "長崎空港",
+    name: "長崎空港（到着）",
     category: "transit",
     area: "大村市",
     lat: 32.9168, lng: 129.9142,
     duration: 30,
     desc: "大村湾に浮かぶ海上空港。到着後はレンタカー受け取りなど。長崎市内まで車で約50分（長崎自動車道経由）。この30分は荷物受け取り＋レンタカー手続きの目安です。",
-    tags: ["出発地", "レンタカー", "空港"]
+    tags: ["到着", "レンタカー", "空港"]
+  },
+  {
+    id: "nagasaki-airport-depart",
+    name: "長崎空港（出発 20:20）",
+    category: "transit",
+    area: "大村市",
+    lat: 32.9168, lng: 129.9142,
+    duration: 60,
+    desc: "20:20発の便。保安検査の締め切りは目安19:30〜19:40。長崎市内からは車で約50分のため、遅くとも18:30には出発を。この60分はチェックイン・保安検査・搭乗待ちの合計目安です。",
+    tags: ["出発", "空港", "20:20発", "帰り"]
   },
 
   // ===== 宿（拠点）=====
@@ -309,8 +319,8 @@ const PRESETS = {
     start2: "09:00",
     // Day1: 空港(10:30)→ 移動50分 → 中華街(ランチ)→ 角煮まんじゅう→ カステラ → グラバー園 → 大浦天主堂 → 界 雲仙(夕食はホテル)
     day1: ["nagasaki-airport", "chinatown", "kakuni-manju", "fukusaya", "glover", "oura", "kai-unzen"],
-    // Day2: 雲仙地獄 → 仁田峠ロープウェイ → 小浜ちゃんぽん(ランチ) → 吉宗 本店(夕食) → 帰路
-    day2: ["unzen-jigoku", "nitatoge", "obama-champon", "yoshiso"]
+    // Day2: 雲仙地獄 → 仁田峠ロープウェイ → 小浜ちゃんぽん(ランチ) → 吉宗 本店(夕食) → 長崎空港(20:20発)
+    day2: ["unzen-jigoku", "nitatoge", "obama-champon", "yoshiso", "nagasaki-airport-depart"]
   },
   classic: {
     name: "王道：長崎市内 → 雲仙泊 → 地獄&ロープウェイ",
