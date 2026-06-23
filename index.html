@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>長崎・雲仙 旅行ルートシミュレーター</title>
+  <link rel="preconnect" href="https://unpkg.com" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="title">
+      <h1>長崎・雲仙 旅行ルートシミュレーター</h1>
+      <p class="subtitle">拠点：星野リゾート 界 雲仙 ／ レンタカー・1泊2日</p>
+    </div>
+    <div class="header-actions">
+      <label class="preset-label">
+        おすすめプラン
+        <select id="presetSelect">
+          <option value="">— 選択して読込 —</option>
+        </select>
+      </label>
+      <button id="clearBtn" class="btn btn-ghost" title="ルートを空にする">クリア</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <!-- 左：スポット一覧 -->
+    <aside class="panel panel-left">
+      <h2 class="panel-title">スポットを選ぶ</h2>
+      <div class="filters" id="filters"></div>
+      <input type="search" id="searchBox" class="search" placeholder="スポット名で検索…" />
+      <div class="poi-list" id="poiList"></div>
+    </aside>
+
+    <!-- 中央：地図 -->
+    <section class="map-wrap">
+      <div id="map"></div>
+      <div class="map-legend" id="legend"></div>
+    </section>
+
+    <!-- 右：ルート -->
+    <aside class="panel panel-right">
+      <h2 class="panel-title">あなたのルート</h2>
+
+      <div class="day-block" data-day="1">
+        <div class="day-head">
+          <span class="day-name">Day 1</span>
+          <label class="start-time">出発
+            <input type="time" id="start1" value="10:00" />
+          </label>
+        </div>
+        <ol class="route-list" id="route1" data-day="1"></ol>
+        <div class="day-summary" id="summary1"></div>
+      </div>
+
+      <div class="day-block" data-day="2">
+        <div class="day-head">
+          <span class="day-name">Day 2</span>
+          <label class="start-time">出発
+            <input type="time" id="start2" value="09:00" />
+          </label>
+        </div>
+        <ol class="route-list" id="route2" data-day="2"></ol>
+        <div class="day-summary" id="summary2"></div>
+      </div>
+
+      <div class="route-footer">
+        <p class="hint">スポットの「＋」で追加、ドラッグで並べ替え。経路・所要時間は地図に反映されます。</p>
+        <p class="routing-status" id="routingStatus"></p>
+      </div>
+    </aside>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
